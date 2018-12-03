@@ -16,6 +16,9 @@ class VerifierProcess
      */
     private $installManager;
 
+    /** @var int command exit code */
+    private $exitCode;
+
     /**
      * VerifierProcess constructor.
      *
@@ -26,6 +29,22 @@ class VerifierProcess
         $this->installManager = $installManager;
     }
 
+    /**
+     * @return int
+     */
+    public function getExitCode(): int
+    {
+        return $this->exitCode;
+    }
+
+    /**
+     * @param int $exitCode
+     */
+    public function setExitCode(int $exitCode): void
+    {
+        $this->exitCode = $exitCode;
+    }
+    
     /**
      * Execute the Pact Verifier Service.
      *
