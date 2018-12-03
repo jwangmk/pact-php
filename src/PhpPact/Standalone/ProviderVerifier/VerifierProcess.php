@@ -24,6 +24,7 @@ class VerifierProcess
      *
      * @param null|InstallManager $installManager
      */
+
     public function __construct(InstallManager $installManager)
     {
         $this->installManager = $installManager;
@@ -44,7 +45,7 @@ class VerifierProcess
     {
         $this->exitCode = $exitCode;
     }
-    
+
     /**
      * Execute the Pact Verifier Service.
      *
@@ -68,6 +69,7 @@ class VerifierProcess
 
         $logger->addInfo("Verifying PACT with script:\n{$processRunner->getCommand()}\n\n");
         $processRunner->runBlocking();
+        $this->setExitCode($processRunner->getExitCode());
 
         $logger->addInfo('out > ' . $processRunner->getOutput());
         $logger->addError('err > ' . $processRunner->getStderr());
