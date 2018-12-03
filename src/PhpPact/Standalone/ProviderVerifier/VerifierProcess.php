@@ -16,6 +16,9 @@ class VerifierProcess
      */
     private $installManager;
 
+    /** @var int command exit code */
+    private $exitCode;
+
     /**
      * VerifierProcess constructor.
      *
@@ -24,6 +27,22 @@ class VerifierProcess
     public function __construct(InstallManager $installManager)
     {
         $this->installManager = $installManager;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExitCode(): int
+    {
+        return $this->exitCode;
+    }
+
+    /**
+     * @param int $exitCode
+     */
+    public function setExitCode(int $exitCode): void
+    {
+        $this->exitCode = $exitCode;
     }
 
     /**
@@ -49,6 +68,7 @@ class VerifierProcess
 
         $logger->addInfo("Verifying PACT with script:\n{$processRunner->getCommand()}\n\n");
         $processRunner->runBlocking();
+        $this->setExitCode($processRunner->getExitCode());
 
         $logger->addInfo('out > ' . $processRunner->getOutput());
         $logger->addError('err > ' . $processRunner->getStderr());
