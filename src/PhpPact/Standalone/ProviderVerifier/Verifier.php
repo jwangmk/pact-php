@@ -230,7 +230,6 @@ class Verifier
     protected function verifyAction(array $arguments)
     {
         $this->verifierProcess->run($arguments, $this->processTimeout, $this->processIdleTimeout);
-        $this->setExitCode($this->verifierProcess->getExitCode());
     }
 
     protected function getBrokerHttpClient(): BrokerHttpClient
