@@ -32,9 +32,6 @@ class Verifier
     /** @var InstallManager */
     protected $installManager;
 
-    /** @var int command exit code */
-    private $exitCode;
-
     public function __construct(
         VerifierConfigInterface $config,
         InstallManager $installManager = null,
@@ -50,22 +47,6 @@ class Verifier
         if ($brokerHttpClient) {
             $this->brokerHttpClient = $brokerHttpClient;
         }
-    }
-
-    /**
-     * @return int
-     */
-    public function getExitCode(): int
-    {
-        return $this->exitCode;
-    }
-
-    /**
-     * @param int $exitCode
-     */
-    public function setExitCode(int $exitCode): void
-    {
-        $this->exitCode = $exitCode;
     }
 
     /**
@@ -230,7 +211,7 @@ class Verifier
     protected function verifyAction(array $arguments)
     {
         $this->verifierProcess->run($arguments, $this->processTimeout, $this->processIdleTimeout);
-        $this->setExitCode($this->verifierProcess->getExitCode());
+
     }
 
     protected function getBrokerHttpClient(): BrokerHttpClient
