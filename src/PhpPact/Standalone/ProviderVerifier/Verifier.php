@@ -211,7 +211,6 @@ class Verifier
     protected function verifyAction(array $arguments)
     {
         $this->verifierProcess->run($arguments, $this->processTimeout, $this->processIdleTimeout);
-
     }
 
     protected function getBrokerHttpClient(): BrokerHttpClient
